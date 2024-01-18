@@ -60,7 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     textColor: Colors.brown[700],
                                   ),
-                                  // Добавляем ExpansionTile для отображения ингредиентов
                                   ExpansionTile(
                                     collapsedBackgroundColor: Colors.grey[300],
                                     backgroundColor: Colors.grey[300],
@@ -68,8 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     textColor: Colors.brown[900],
                                     collapsedTextColor: Colors.brown[900],
                                     children: [
-                                      // Отображаем список ингредиентов
-                                      // Отображаем список ингредиентов
                                       Column(
                                         children: recipe[index]
                                             .ingredientsAndWeightsMap
@@ -105,23 +102,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-/*
-
-
- */
-
-/*
-// Отображаем список ингредиентов
-                                    Column(
-                                      children: testIngredient.map((ingredient) {
-                                        return ListTile(
-                                          title: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(ingredient), // Название ингредиента слева
-                                              const Text('35'), // Вес ингредиента справа
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
-                                      */
