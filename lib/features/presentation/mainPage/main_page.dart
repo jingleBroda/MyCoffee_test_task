@@ -12,8 +12,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  //final dbHelper = DatabaseHelper();
-  //final testIngredient = <String>["Зерна", "Горячая вода", "Молоко"];
   final controller = MainPageController();
 
   @override
@@ -21,10 +19,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: const Text('My Coffee'),
+            title: const Text(
+                'Список рецептов',
+              style: TextStyle(
+                color: Colors.white
+              ),
+            ),
+            backgroundColor: Colors.brown[400],
           ),
           body: FutureBuilder(
-            future: controller.getRecipeList(),//dbHelper.getAllCoffeeRecipes(),
+            future: controller.getRecipeList(),
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return const Center(
@@ -32,50 +36,69 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               }
               final recipe = snapshot.data as List<DomainCoffeeRecipe>;
-              return ListView.builder(
-                itemCount: recipe.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 16, left: 16, right: 16),
-                          child: Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  title: Text(recipe[index].recipeName),
-                                ),
-                                // Добавляем ExpansionTile для отображения ингредиентов
-                                ExpansionTile(
-                                  title: const Text('Ингредиенты:'),
-                                  children: [
-                                    // Отображаем список ингредиентов
-                                    // Отображаем список ингредиентов
-                                    Column(
-                                      children: recipe[index].ingredientsAndWeightsMap.entries.map((entry) {
-                                        return ListTile(
-                                          title: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(entry.key),
-                                              Text(entry.value.toString()),
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
+              return Container(
+                decoration: BoxDecoration(color: Colors.brown[700]),
+                child: ListView.builder(
+                  itemCount: recipe.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                top: 16, left: 16, right: 16),
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      recipe[index].recipeName,
+                                      style: const TextStyle(
+                                          fontSize: 24.0,
+                                      ),
                                     ),
-                                  ],
-                                ),
-                              ],
+                                    textColor: Colors.brown[700],
+                                  ),
+                                  // Добавляем ExpansionTile для отображения ингредиентов
+                                  ExpansionTile(
+                                    collapsedBackgroundColor: Colors.grey[300],
+                                    backgroundColor: Colors.grey[300],
+                                    title: const Text('Ингредиенты:'),
+                                    textColor: Colors.brown[900],
+                                    collapsedTextColor: Colors.brown[900],
+                                    children: [
+                                      // Отображаем список ингредиентов
+                                      // Отображаем список ингредиентов
+                                      Column(
+                                        children: recipe[index]
+                                            .ingredientsAndWeightsMap
+                                            .entries
+                                            .map((entry) {
+                                          return ListTile(
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(entry.key),
+                                                Text(entry.value.toString()),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
-                },
+                      ],
+                    );
+                  },
+                ),
               );
             },
           )),
@@ -102,4 +125,3 @@ class _MyHomePageState extends State<MyHomePage> {
                                         );
                                       }).toList(),
                                       */
-
